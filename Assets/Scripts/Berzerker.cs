@@ -11,6 +11,9 @@ public class Berzerker : MonoBehaviour
 
     public GameObject target = null;
 
+    public Collider2D fieldOfView = null;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,5 +32,13 @@ public class Berzerker : MonoBehaviour
         // To do
 
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Boum! you're dead!");
+    }
+    
+
+
 
 }
