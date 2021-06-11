@@ -25,23 +25,23 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("w")){
+        if (Input.GetKey("w") || Input	.GetKey("up")){
             handleMovement( new Vector3(0, movementSpeed, 0));
         }
 
-        if (Input.GetKey("s")){
+        if (Input.GetKey("s") || Input	.GetKey("down")){
             handleMovement( new Vector3(0, -1 * movementSpeed, 0));
 
             // transform.position = transform.position + new Vector3(0, -1 * movementSpeed, 0) ;
         }
 
-        if (Input.GetKey("a")){
+        if (Input.GetKey("a") || Input	.GetKey("left")){
             handleMovement( new Vector3(-1 * movementSpeed, 0, 0));
 
             // transform.position = transform.position + new Vector3(-1 * movementSpeed, 0, 0) ;
         }
 
-        if (Input.GetKey("d")){
+        if (Input.GetKey("d") || Input	.GetKey("right")){
             handleMovement( new Vector3(movementSpeed, 0, 0));
 
             // transform.position = transform.position + new Vector3(movementSpeed, 0, 0) ;
