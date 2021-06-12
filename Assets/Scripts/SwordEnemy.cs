@@ -110,16 +110,15 @@ public class SwordEnemy : Character
         {
             RaycastHit2D hit = hits[j];
             Character target = hit.transform.gameObject.GetComponent<Character>();
-            if (target != null && target != transform.gameObject){
+            if (target != null && target != transform.gameObject && hit.transform.gameObject.layer == 7){
                 target.applyDamage(1);
             }
 
-            Berzerker b = hit.transform.gameObject.GetComponent<Berzerker>();
-            if (b != null){
-                Debug.Log("Hit myself!!!");
-                transform.gameObject.GetComponent<Character>().applyDamage(1);
-                transform.gameObject.GetComponent<Character>().pushBack(hit.transform);
-            }
+            // Berzerker b = hit.transform.gameObject.GetComponent<Berzerker>();
+            // if (b != null){
+                // transform.gameObject.GetComponent<Character>().applyDamage(1);
+                // transform.gameObject.GetComponent<Character>().pushBack(hit.transform);
+            // }
         }
     }
 
