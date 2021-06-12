@@ -39,6 +39,8 @@ public class Berzerker : MonoBehaviour
     {
         Debug.Log("I see you!");
         isAttacking = true;
+        targetingCone.GetComponent<SpriteRenderer>().enabled = true;
+
     }
 
     void handleAttack(){
@@ -49,6 +51,7 @@ public class Berzerker : MonoBehaviour
             // Deal damage to all of them
             isAttacking = false;
             timeTilAttack = windUpTime;
+            targetingCone.GetComponent<SpriteRenderer>().enabled = false;
         } else {
             timeTilAttack -= Time.deltaTime;
         }
