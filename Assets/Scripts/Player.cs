@@ -42,7 +42,7 @@ public class Player : Character
 
     void Update()
     {
-        //FindObjectOfType<GameManager>().GameOver(isAlive);
+        FindObjectOfType<GameManager>().GameOver(isAlive);
         GetPlayerInput();
         SetPlayerState();
         SetPlayerEffects();
