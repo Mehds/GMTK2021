@@ -9,7 +9,7 @@ public class Berzerker : MonoBehaviour
 
     public float minimumDistance = 0.5f;
 
-    public GameObject target = null;
+    public GameObject Target = null;
 
     public Collider2D fieldOfView = null;
 
@@ -23,8 +23,16 @@ public class Berzerker : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 direction = target.transform.position - transform.position;
+        Vector3 targetPosition = Target.transform.position;
         
+        if (targetPosition.x < transform.position.x){
+            transform.eulerAngles = new Vector3(0, 0, 0); 
+        } else {
+            transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+        
+        Vector3 direction = targetPosition - transform.position;
+
         if (direction.magnitude > minimumDistance) {
          transform.position = transform.position + Vector3.Scale(Vector3.Normalize(direction),new Vector3(movementSpeed, movementSpeed, 0) );
         }
@@ -33,10 +41,6 @@ public class Berzerker : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("Boum! you're dead!");
-    }
     
 
 
