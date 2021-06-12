@@ -91,7 +91,7 @@ public class SwordEnemy : Character
         }
     
     void OnTriggerEnter2D(Collider2D other){
-        if (isAlive){
+        if (isAlive && other.transform.gameObject.layer == 8){
             isAttacking = true;
             if (targetingCircle != null){
                 targetingCircle.GetComponent<SpriteRenderer>().enabled = true;
