@@ -191,5 +191,9 @@ public class Player : Character
         isPressedRight = false;
     }
 
+    public float GetDodgeCooldownTimer()
+    {
+        return dodgeCooldownTimer;
+    }
 
 }

@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
 
     public GameOverScreen gameOverScript;
 
+    public HUD hud;
+
+
+
     
 
     // Start is called before the first frame update
@@ -24,6 +28,8 @@ public class GameManager : MonoBehaviour
         // {
         //     Debug.Log("Git Gud! HP:" + playerCharacter.health.ToString());
         // } 
+
+        hud.Refresh(playerCharacter.health, playerCharacter.GetDodgeCooldownTimer());
         
     }
 
@@ -32,6 +38,7 @@ public class GameManager : MonoBehaviour
         if (!isAlive)
         {
             gameOverScript.Setup();
+            hud.Disable();
             playerCharacter.GetComponent<Player>().enabled = false ;
         }
     }
@@ -39,5 +46,10 @@ public class GameManager : MonoBehaviour
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadGame()
+    {
+        SceneManager.LoadScene("Level01");
     }
 }
