@@ -52,4 +52,9 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Level01");
     }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("Level00");
+    }
 }
