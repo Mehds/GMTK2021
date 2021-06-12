@@ -105,7 +105,7 @@ public class Berzerker : MonoBehaviour
     public void damageTargets(){
         // ToDo: Make sure to only be in the characters layer
         // Vector3[] lines = handleLineOfSight();
-        // int targetMask = 1 << 8 | 1 << 7;
+        int targetMask = 1 << 8 | 1 << 7;
         // for (int i = 0; i < 3; i++){
         //     RaycastHit2D[] hits;
 
@@ -124,10 +124,8 @@ public class Berzerker : MonoBehaviour
 
         RaycastHit2D[] hits;
 
-        hits = Physics2D.CircleCastAll(transform.position, 0.7f, new Vector3(0,0,0));
+        hits = Physics2D.CircleCastAll(transform.position, 1.5f, new Vector3(0,0,0), Mathf.Infinity, targetMask);
         
-        Debug.Log(hits.Length);
-
         for (int j = 0; j < hits.Length; j++)
         {
             RaycastHit2D hit = hits[j];
