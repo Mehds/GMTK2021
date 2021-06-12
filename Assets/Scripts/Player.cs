@@ -5,10 +5,8 @@ using UnityEngine;
 public class Player : Character
 {
     public float dodgeSpeed = 0.6f;
-    public float dodgeMultiplier = 2f;
-    public float dodgeTimer = 0.25f; 
-
-    public float dodgeCooldown = 2f;
+    public float dodgeMultiplier = 2;
+    public int dodgeTimerFPS = 15; 
 
     public GameObject anchor = null;
     public LineRenderer lineRenderer = null;
@@ -23,10 +21,8 @@ public class Player : Character
     private bool isPressedRight = false;
     private bool isPressedDodge = false;
 
-    private float dodgeTimerCounter = 0;
-    private float dodgeCooldownTimer = 0;
+    private int dodgeTimerCounter = 0;
     private bool isDodging = false;
-    private bool isDodgeAvailable = true;
     private bool isImmune = false;
     private SpriteRenderer characterSprite = null;
 
@@ -42,14 +38,12 @@ public class Player : Character
 
     void Update()
     {
-        FindObjectOfType<GameManager>().GameOver(isAlive);
         GetPlayerInput();
         SetPlayerState();
         SetPlayerEffects();
     }
     void FixedUpdate()
     {
-
         Vector3 movementDirection = new Vector3(0,0,0);
         if (isPressedUp){
             movementDirection = movementDirection + new Vector3(0, movementSpeed, 0);
@@ -73,15 +67,8 @@ public class Player : Character
 
         if(isPressedDodge)
         {
-            if (dodgeCooldownTimer <= 0)
-            {
-                isDodging = true;
-                dodgeTimerCounter = dodgeTimer;
-                dodgeCooldownTimer = dodgeCooldown;
-            }
-            {
-                Debug.Log("Dodge on cooldown ! " + dodgeCooldownTimer.ToString() + "s left.");
-            }
+            isDodging = true;
+            dodgeTimerCounter = dodgeTimerFPS;
             isPressedDodge = false;
         }
 
@@ -146,23 +133,39 @@ public class Player : Character
     void SetPlayerState()
     {
         //Dodge state
-        if (dodgeTimerCounter > 0)
+        if (dodgeTimerCounter != 0)
         {
-            dodgeTimerCounter = dodgeTimerCounter - Time.deltaTime;
+            dodgeTimerCounter = dodgeTimerCounter - 1;
         }
         else
         {
             isDodging = false;
         }
 
-        //Dodge cooldown
-        if (dodgeCooldownTimer >0)
-        {
-            dodgeCooldownTimer -= Time.deltaTime;
-        }
-
         //Immune state
         isImmune = isDodging;
+    }
+
+    Vector3 GetDodgeMovement()
+    {
+        Vector3 dodgeMovement = new Vector3(0,0,0);
+        if (isPressedUp){
+            dodgeMovement = dodgeMovement + new Vector3(0, dodgeSpeed, 0);
+        }
+
+        if (isPressedDown){
+            dodgeMovement = dodgeMovement + new Vector3(0, -1 * dodgeSpeed, 0);
+        }
+
+        if (isPressedLeft){
+            dodgeMovement = dodgeMovement + new Vector3(-1 * dodgeSpeed, 0, 0);
+        }
+
+        if (isPressedRight){
+            dodgeMovement = dodgeMovement + new Vector3(dodgeSpeed, 0, 0);
+        }
+
+        return dodgeMovement;
     }
 
     void SetPlayerEffects()
@@ -175,15 +178,6 @@ public class Player : Character
         {
             characterSprite.color = Color.white;
         }
-    }
-
-    public void DisableControl()
-    {
-        isPressedDodge = false;
-        isPressedUp = false;
-        isPressedDown = false;
-        isPressedLeft = false;
-        isPressedRight = false;
     }
 
 
