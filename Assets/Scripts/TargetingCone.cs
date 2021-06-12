@@ -18,7 +18,7 @@ public class TargetingCone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<SpriteRenderer>().enabled = false;
+        
     }
 
     // Update is called once per frame
@@ -32,12 +32,13 @@ public class TargetingCone : MonoBehaviour
 
 
         Debug.DrawRay(transform.position, LoS, Color.red);
-        Debug.DrawRay(transform.position, LoSL, Color.red);
-        Debug.DrawRay(transform.position, LoSR, Color.red);
+        // Debug.DrawRay(transform.position, LoSL, Color.red);
+        // Debug.DrawRay(transform.position, LoSR, Color.blue);
 
     }
 
     public void handleLineOfSight(){
+        Debug.Log(transform.eulerAngles.y);
         float yAngle = transform.eulerAngles.y;
 
         LoS = Quaternion.AngleAxis(transform.eulerAngles.z, new Vector3(0, 0, 1)) * Vector3.down;
@@ -46,8 +47,8 @@ public class TargetingCone : MonoBehaviour
 
         if (yAngle == 180){
             LoS = new Vector3(-LoS.x, LoS.y, LoS.z);
-            LoSL = new Vector3(-LoSL.x, LoSL.y, LoSL.z);
-            LoSR = new Vector3(-LoSR.x, LoSR.y, LoSR.z);
+            LoS = new Vector3(-LoSL.x, LoSL.y, LoSL.z);
+            LoS = new Vector3(-LoSL.x, LoSL.y, LoSL.z);
         }
     }
     public void damageTargets(){
@@ -58,6 +59,8 @@ public class TargetingCone : MonoBehaviour
             RaycastHit2D[] hits;
 
             hits = Physics2D.RaycastAll(transform.position, lines[i], range, targetMask);
+
+            //Debug.Log(hits.Length);
 
             for (int j = 0; j < hits.Length; j++)
             {

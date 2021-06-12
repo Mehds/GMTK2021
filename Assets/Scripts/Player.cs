@@ -8,7 +8,7 @@ public class Player : Character
     public float dodgeMultiplier = 2;
     public int dodgeTimerFPS = 15; 
 
-    public GameObject anchor = null;
+    public Berzerker berzerker = null;
     public LineRenderer lineRenderer = null;
     
     public float maxDistance = 5f;
@@ -78,7 +78,7 @@ public class Player : Character
         lineRenderer.endWidth = 0.3f;
 
         lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, anchor.transform.position);
+        lineRenderer.SetPosition(1, berzerker.transform.position);
 
     }
 
@@ -93,7 +93,7 @@ public class Player : Character
                 
         
         Vector3 newPosition = transform.position + intendedMovement;
-        float distance = (newPosition - anchor.transform.position).magnitude;
+        float distance = (newPosition - berzerker.transform.position).magnitude;
 
         if (distance < maxDistance){
             transform.position = newPosition;

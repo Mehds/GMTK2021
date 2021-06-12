@@ -325,7 +325,7 @@ PrefabInstance:
       objectReference: {fileID: 1571612284}
     - target: {fileID: 2869358516905168112, guid: e7d60e78b973f1e4696d3220227e19cd, type: 3}
       propertyPath: windUpTime
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2869358516905168112, guid: e7d60e78b973f1e4696d3220227e19cd, type: 3}
       propertyPath: fieldOfView
@@ -333,7 +333,7 @@ PrefabInstance:
       objectReference: {fileID: 1005751705}
     - target: {fileID: 2869358516905168112, guid: e7d60e78b973f1e4696d3220227e19cd, type: 3}
       propertyPath: movementSpeed
-      value: 0
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 2869358516905168112, guid: e7d60e78b973f1e4696d3220227e19cd, type: 3}
       propertyPath: targetingCone
@@ -530,6 +530,10 @@ PrefabInstance:
       propertyPath: anchor
       value: 
       objectReference: {fileID: 1571612279}
+    - target: {fileID: 6973038987174264282, guid: 41a7eb3f3a2cd4d45a6bf6de60390eec, type: 3}
+      propertyPath: berzerker
+      value: 
+      objectReference: {fileID: 1571612280}
     - target: {fileID: 6973038987174264282, guid: 41a7eb3f3a2cd4d45a6bf6de60390eec, type: 3}
       propertyPath: maxDistance
       value: 6.5

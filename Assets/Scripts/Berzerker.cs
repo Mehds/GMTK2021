@@ -7,14 +7,13 @@ public class Berzerker : MonoBehaviour
     public Transform transform = null;
     public float movementSpeed = 0.1f;
 
-    public float minimumDistance = 0.5f;
+    public float minimumDistance = 2f;
 
     public GameObject Target = null;
 
     public TargetingCone targetingCone = null;
 
     public bool isAttacking = false;
-
     public float windUpTime = 1.0f;
     private float timeTilAttack;
     // Start is called before the first frame update
@@ -40,7 +39,6 @@ public class Berzerker : MonoBehaviour
         Debug.Log("I see you!");
         isAttacking = true;
         targetingCone.GetComponent<SpriteRenderer>().enabled = true;
-
     }
 
     void handleAttack(){
