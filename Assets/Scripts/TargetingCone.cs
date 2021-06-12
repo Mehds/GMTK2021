@@ -8,6 +8,8 @@ public class TargetingCone : MonoBehaviour
     public GameObject Target;
     public Transform transform;
     public float updateSpeed = 0.2f;
+    public float angleChange = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,20 +22,35 @@ public class TargetingCone : MonoBehaviour
         // To-Do: Rotation towards player and shift towards player
         //transform.Rotate(0, 0, Time.deltaTime * 5);
         Vector3 direction = Target.transform.position - transform.position;
-        //float singleStep = updateSpeed * Time.deltaTime;
 
-        // Draw a ray pointing at our target in
-        Debug.DrawRay(transform.position, direction, Color.red);
 
-        // Calculate a rotation a step closer to the target and applies rotation to this object
-        //transform.rotation = Quaternion.LookRotation(TargetPos);
-
-        // Debug.DrawRay(transform.position, TargetPos, Color.red);
-
+        // Todo: make it less complicated
+        // updated y position
         Vector3 newPosition = transform.position + Vector3.Scale(Vector3.Normalize(direction),new Vector3(0, updateSpeed, 0) );
         if (newPosition.y < Parent.transform.position.y + 0.75 && newPosition.y > Parent.transform.position.y - 0.75){
             transform.position = newPosition;
         }
+
+
+        // Draw a ray pointing at our target in
+
+        // Debug.Log(transform.eulerAngles);
+        Vector3 LoS = Quaternion.AngleAxis(transform.eulerAngles.z, Vector3.down) * Vector3.down;
+
+        float angle = Vector3.Angle(Vector3.Normalize(Target.transform.position), Vector3.Normalize(transform.position));
+        // float linedUp = Vector3.Angle(Vector3.Normalize(Parent.transform.position), Vector3.Normalize(Target.transform.position));
+        //Debug.Log(angle);
+
+        if (angle > 90){
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - angleChange);
+        } else {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + angleChange);
+        }
+
+        Debug.DrawRay(transform.position, LoS, Color.green);
+        Debug.DrawRay(transform.position, Target.transform.position, Color.red);
+
+        
 
     }
 
