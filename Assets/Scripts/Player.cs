@@ -2,13 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
-    public float movementSpeed = 0.3f;
-    public int health = 1;
-    public Rigidbody2D rb2d = null;
-    public Transform transform = null;
-
     public GameObject anchor = null;
     public LineRenderer lineRenderer = null;
     
@@ -25,7 +20,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("w") || Input.GetKey("up")){
+        if (isAlive) {
+            if (Input.GetKey("w") || Input.GetKey("up")){
             handleMovement( new Vector3(0, movementSpeed, 0));
         }
 
@@ -45,7 +41,9 @@ public class Player : MonoBehaviour
             handleMovement( new Vector3(movementSpeed, 0, 0));
 
             // transform.position = transform.position + new Vector3(movementSpeed, 0, 0) ;
+        }   
         }
+        
 
         lineRenderer.startWidth = 0.3f;
         lineRenderer.endWidth = 0.3f;

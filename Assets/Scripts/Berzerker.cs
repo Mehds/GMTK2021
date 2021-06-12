@@ -11,18 +11,49 @@ public class Berzerker : MonoBehaviour
 
     public GameObject Target = null;
 
-    public Collider2D fieldOfView = null;
+    public TargetingCone targetingCone = null;
 
+    public bool isAttacking = false;
 
+    public float windUpTime = 1.0f;
+    private float timeTilAttack;
     // Start is called before the first frame update
     void Start()
     {
-        
+        timeTilAttack = windUpTime;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!isAttacking){
+            handleMovement();
+        }
+        else {
+            handleAttack();
+        }
+
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("I see you!");
+        isAttacking = true;
+    }
+
+    void handleAttack(){
+        if (timeTilAttack <= 0){
+            Debug.Log("BOOM BOOM SHAKALAKA BOOMBOOM!");
+            targetingCone.damageTargets();
+            // Get all gameobjects inside the target
+            // Deal damage to all of them
+            isAttacking = false;
+            timeTilAttack = windUpTime;
+        } else {
+            timeTilAttack -= Time.deltaTime;
+        }
+    }
+    void handleMovement(){
         Vector3 targetPosition = Target.transform.position;
         
         if (targetPosition.x < transform.position.x){
@@ -37,12 +68,7 @@ public class Berzerker : MonoBehaviour
             transform.position = transform.position + Vector3.Scale(Vector3.Normalize(direction),new Vector3(movementSpeed, movementSpeed, 0) );
         }
 
-        // To do
-
     }
-
-    
-
 
 
 }
