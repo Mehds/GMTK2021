@@ -7,7 +7,7 @@ public class TargetingCone : MonoBehaviour
     public Berzerker Parent;
     public Transform TargetTransform;
     public Transform transform;
-    public float range = 10f;
+    public float range = 2f;
     public float updateSpeed = 0.2f;
     public float angleChange = 1f;
 
@@ -18,7 +18,7 @@ public class TargetingCone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetComponent<SpriteRenderer>().enabled = false;
     }
 
     // Update is called once per frame
@@ -27,26 +27,41 @@ public class TargetingCone : MonoBehaviour
         if (!Parent.isAttacking){
             handleMovement();
         }
+
+        handleLineOfSight();
+
+
         Debug.DrawRay(transform.position, LoS, Color.red);
         Debug.DrawRay(transform.position, LoSL, Color.red);
-        Debug.DrawRay(transform.position, LoSR, Color.blue);
+        Debug.DrawRay(transform.position, LoSR, Color.red);
 
     }
 
+    public void handleLineOfSight(){
+        float yAngle = transform.eulerAngles.y;
+
+        LoS = Quaternion.AngleAxis(transform.eulerAngles.z, new Vector3(0, 0, 1)) * Vector3.down;
+        LoSL = Quaternion.AngleAxis(transform.eulerAngles.z + 30, new Vector3(0, 0, 1)) * Vector3.down;
+        LoSR = Quaternion.AngleAxis(transform.eulerAngles.z - 30, new Vector3(0, 0, 1)) * Vector3.down;
+
+        if (yAngle == 180){
+            LoS = new Vector3(-LoS.x, LoS.y, LoS.z);
+            LoSL = new Vector3(-LoSL.x, LoSL.y, LoSL.z);
+            LoSR = new Vector3(-LoSR.x, LoSR.y, LoSR.z);
+        }
+    }
     public void damageTargets(){
         // ToDo: Make sure to only be in the characters layer
         Vector3[] lines = {LoS, LoSL, LoSR};
         int targetMask = 1 << 8;
         for (int i = 0; i < 3; i++){
-            RaycastHit[] hits;
+            RaycastHit2D[] hits;
 
-            hits = Physics.RaycastAll(transform.position, lines[i], 150f, targetMask);
-
-            Debug.Log(hits.Length);
+            hits = Physics2D.RaycastAll(transform.position, lines[i], range, targetMask);
 
             for (int j = 0; j < hits.Length; j++)
             {
-                RaycastHit hit = hits[j];
+                RaycastHit2D hit = hits[j];
                 Character target = hit.transform.gameObject.GetComponent<Character>();
                 target.applyDamage(5);
             }
@@ -68,9 +83,6 @@ public class TargetingCone : MonoBehaviour
         // }
 
 
-        LoS = Quaternion.AngleAxis(transform.eulerAngles.z, new Vector3(0, 0, 1)) * Vector3.down;
-        LoSL = Quaternion.AngleAxis(transform.eulerAngles.z + 30, new Vector3(0, 0, 1)) * Vector3.down;
-        LoSR = Quaternion.AngleAxis(transform.eulerAngles.z - 30, new Vector3(0, 0, 1)) * Vector3.down;
         float angle = Vector3.Angle(LoS, TargetPosition);
 
         // Debug.DrawRay(transform.position, TargetPosition, Color.red);
