@@ -42,7 +42,7 @@ public class Player : Character
 
     void Update()
     {
-        FindObjectOfType<GameManager>().GameOver(isAlive);
+        //FindObjectOfType<GameManager>().GameOver(isAlive);
         GetPlayerInput();
         SetPlayerState();
         SetPlayerEffects();
@@ -167,6 +167,11 @@ public class Player : Character
 
     void SetPlayerEffects()
     {
+        if(!isAlive){
+            characterSprite.color = Color.red;
+            return;
+        }
+        
         if (isImmune)
         {
             characterSprite.color = Color.cyan;

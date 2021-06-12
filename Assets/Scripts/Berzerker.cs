@@ -11,15 +11,18 @@ public class Berzerker : MonoBehaviour
 
     public GameObject Target = null;
 
-    public TargetingCone targetingCone = null;
+    private GameObject targetingCone = null;
 
     public bool isAttacking = false;
     public float windUpTime = 1.0f;
     private float timeTilAttack;
+    public float range = 2f;
+
     // Start is called before the first frame update
     void Start()
     {
         timeTilAttack = windUpTime;
+        targetingCone = transform.Find("TargetingCone").gameObject;
     }
 
     // Update is called once per frame
@@ -36,15 +39,17 @@ public class Berzerker : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("I see you!");
-        isAttacking = true;
-        targetingCone.GetComponent<SpriteRenderer>().enabled = true;
+        if (other.transform.gameObject.layer == 8){
+            Debug.Log("I see you!");
+            isAttacking = true;
+            targetingCone.GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
 
     void handleAttack(){
         if (timeTilAttack <= 0){
             Debug.Log("BOOM BOOM SHAKALAKA BOOMBOOM!");
-            targetingCone.damageTargets();
+            damageTargets();
             // Get all gameobjects inside the target
             // Deal damage to all of them
             isAttacking = false;
@@ -69,6 +74,42 @@ public class Berzerker : MonoBehaviour
             transform.position = transform.position + Vector3.Scale(Vector3.Normalize(direction),new Vector3(movementSpeed, movementSpeed, 0) );
         }
 
+    }
+
+
+    public Vector3[] handleLineOfSight(){
+        float yAngle = targetingCone.transform.eulerAngles.y;
+
+        Vector3 LoS = Quaternion.AngleAxis(targetingCone.transform.eulerAngles.z, new Vector3(0, 0, 1)) * Vector3.down;
+        Vector3 LoSL = Quaternion.AngleAxis(targetingCone.transform.eulerAngles.z + 30, new Vector3(0, 0, 1)) * Vector3.down;
+        Vector3 LoSR = Quaternion.AngleAxis(targetingCone.transform.eulerAngles.z - 30, new Vector3(0, 0, 1)) * Vector3.down;
+
+        if (yAngle == 180){
+            LoS = new Vector3(-LoS.x, LoS.y, LoS.z);
+            LoSL = new Vector3(-LoSL.x, LoSL.y, LoSL.z);
+            LoSR = new Vector3(-LoSR.x, LoSR.y, LoSR.z);
+        }
+        Vector3[] lines = {LoS, LoSL, LoSR};
+
+        return lines;
+    }
+    public void damageTargets(){
+        // ToDo: Make sure to only be in the characters layer
+        Vector3[] lines = handleLineOfSight();
+        int targetMask = 1 << 8;
+        for (int i = 0; i < 3; i++){
+            RaycastHit2D[] hits;
+
+            hits = Physics2D.RaycastAll(transform.position, lines[i], range, targetMask);
+
+            for (int j = 0; j < hits.Length; j++)
+            {
+                RaycastHit2D hit = hits[j];
+                Character target = hit.transform.gameObject.GetComponent<Character>();
+                target.applyDamage(5);
+            }
+
+        }
     }
 
 

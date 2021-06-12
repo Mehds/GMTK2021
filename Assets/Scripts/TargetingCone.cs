@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TargetingCone : MonoBehaviour
 {
-    public Berzerker Parent;
+    private GameObject Parent;
     public Transform TargetTransform;
     public Transform transform;
     public float range = 2f;
@@ -18,59 +18,58 @@ public class TargetingCone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetComponent<SpriteRenderer>().enabled = false;
+        Parent = transform.parent.gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!Parent.isAttacking){
+        // if (!Parent.isAttacking){
             handleMovement();
-        }
+        // }
 
-        handleLineOfSight();
+        // handleLineOfSight();
 
 
-        Debug.DrawRay(transform.position, LoS, Color.red);
-        // Debug.DrawRay(transform.position, LoSL, Color.red);
+        // Debug.DrawRay(transform.position, LoS, Color.blue);
+        // Debug.DrawRay(transform.position, LoSL, Color.blue);
         // Debug.DrawRay(transform.position, LoSR, Color.blue);
 
     }
 
-    public void handleLineOfSight(){
-        Debug.Log(transform.eulerAngles.y);
-        float yAngle = transform.eulerAngles.y;
+    // public void handleLineOfSight(){
+    //     float yAngle = transform.eulerAngles.y;
 
-        LoS = Quaternion.AngleAxis(transform.eulerAngles.z, new Vector3(0, 0, 1)) * Vector3.down;
-        LoSL = Quaternion.AngleAxis(transform.eulerAngles.z + 30, new Vector3(0, 0, 1)) * Vector3.down;
-        LoSR = Quaternion.AngleAxis(transform.eulerAngles.z - 30, new Vector3(0, 0, 1)) * Vector3.down;
+    //     LoS = Quaternion.AngleAxis(transform.eulerAngles.z, new Vector3(0, 0, 1)) * Vector3.down;
+    //     LoSL = Quaternion.AngleAxis(transform.eulerAngles.z + 30, new Vector3(0, 0, 1)) * Vector3.down;
+    //     LoSR = Quaternion.AngleAxis(transform.eulerAngles.z - 30, new Vector3(0, 0, 1)) * Vector3.down;
 
-        if (yAngle == 180){
-            LoS = new Vector3(-LoS.x, LoS.y, LoS.z);
-            LoS = new Vector3(-LoSL.x, LoSL.y, LoSL.z);
-            LoS = new Vector3(-LoSL.x, LoSL.y, LoSL.z);
-        }
-    }
-    public void damageTargets(){
-        // ToDo: Make sure to only be in the characters layer
-        Vector3[] lines = {LoS, LoSL, LoSR};
-        int targetMask = 1 << 8;
-        for (int i = 0; i < 3; i++){
-            RaycastHit2D[] hits;
+    //     if (yAngle == 180){
+    //         LoS = new Vector3(-LoS.x, LoS.y, LoS.z);
+    //         LoSL = new Vector3(-LoSL.x, LoSL.y, LoSL.z);
+    //         LoSR = new Vector3(-LoSR.x, LoSR.y, LoSR.z);
+    //     }
+    // }
+    // public void damageTargets(){
+    //     // ToDo: Make sure to only be in the characters layer
+    //     Vector3[] lines = {LoS, LoSL, LoSR};
+    //     int targetMask = 1 << 8;
+    //     for (int i = 0; i < 3; i++){
+    //         RaycastHit2D[] hits;
 
-            hits = Physics2D.RaycastAll(transform.position, lines[i], range, targetMask);
+    //         hits = Physics2D.RaycastAll(transform.position, lines[i], range, targetMask);
 
-            //Debug.Log(hits.Length);
 
-            for (int j = 0; j < hits.Length; j++)
-            {
-                RaycastHit2D hit = hits[j];
-                Character target = hit.transform.gameObject.GetComponent<Character>();
-                target.applyDamage(5);
-            }
+    //         for (int j = 0; j < hits.Length; j++)
+    //         {
+    //             RaycastHit2D hit = hits[j];
+    //             Character target = hit.transform.gameObject.GetComponent<Character>();
+    //             target.applyDamage(5);
+    //         }
 
-        }
-    }
+    //     }
+    // }
 
     void handleMovement(){
         // To-Do: Rotation towards player and shift towards player
@@ -87,6 +86,12 @@ public class TargetingCone : MonoBehaviour
 
 
         float angle = Vector3.Angle(LoS, TargetPosition);
+        LoS = Quaternion.AngleAxis(transform.eulerAngles.z, new Vector3(0, 0, 1)) * Vector3.down;
+        float yAngle = transform.eulerAngles.y;
+
+        if (yAngle == 180){
+             LoS = new Vector3(-LoS.x, LoS.y, LoS.z);
+        }
 
         // Debug.DrawRay(transform.position, TargetPosition, Color.red);
 

@@ -8,8 +8,9 @@ public class SwordEnemy : Character
     public Berzerker berzerker = null;
     public Player player = null;
 
+    private GameObject targetingCircle = null;
+
     public float minimumDistance = 0.7f;
-    // public float deathTimer = 2f;
 
     public bool isAttacking = false;
     public float windUpTime = 0.5f;
@@ -19,6 +20,7 @@ public class SwordEnemy : Character
     void Start()
     {
         timeTilAttack = windUpTime;
+        targetingCircle = transform.Find("TargetingCircle").gameObject;
     }
 
     // Update is called once per frame
@@ -26,9 +28,11 @@ public class SwordEnemy : Character
     {
         handleState();
         // handleDeath();
-        if (isAlive){
+        if (isAlive && !isAttacking){
             handleMovement();
             //handleAttack();
+        } else if (isAlive && isAttacking){
+            handleAttack();
         }
     }
 
@@ -36,17 +40,30 @@ public class SwordEnemy : Character
         if (!isAlive) {
             GetComponent<SpriteRenderer>().color = Color.red;
             Destroy(GetComponent<Rigidbody2D>());
-            Destroy(GetComponent<CircleCollider2D>());
+            Destroy(targetingCircle);
+            transform.gameObject.layer = 2;
         }
     }
-    // void handleDeath(){
-    //     if (!isAlive){
-    //         deathTimer -= Time.deltaTime;
-    //         // if (deathTimer <= 0) {
-    //         //     Destroy(transform.gameObject);
-    //         // }
-    //     }
-    // }
+
+    void pushBack(Transform t){
+        Vector3 direction = Vector3.Scale( t.position - transform.position, new Vector3(-2, -2, -2));
+        transform.position += direction;
+    }
+    void handleAttack(){
+        if (timeTilAttack <= 0){
+            // Debug.Log("BOOM BOOM SHAKALAKA BOOMBOOM!");
+
+            damageTargets();
+            // Get all gameobjects inside the target
+            // Deal damage to all of them
+            isAttacking = false;
+            timeTilAttack = windUpTime;
+            targetingCircle.GetComponent<SpriteRenderer>().enabled = false;
+        } else {
+            timeTilAttack -= Time.deltaTime;
+        }
+
+    }
 
     void handleMovement(){
             Vector3 distToBerzerker = berzerker.transform.position - transform.position;
@@ -74,6 +91,36 @@ public class SwordEnemy : Character
         }
     
     void OnTriggerEnter2D(Collider2D other){
-        Debug.Log(other);
+        if (isAlive){
+            isAttacking = true;
+            if (targetingCircle != null){
+                targetingCircle.GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
     }
+
+    public void damageTargets()
+    {
+        
+        RaycastHit2D[] hits;
+
+        hits = Physics2D.CircleCastAll(transform.position, 0.7f, new Vector3(0,0,0));
+
+        for (int j = 0; j < hits.Length; j++)
+        {
+            RaycastHit2D hit = hits[j];
+            Character target = hit.transform.gameObject.GetComponent<Character>();
+            if (target != null && target != transform.gameObject){
+                target.applyDamage(1);
+            }
+
+            Berzerker b = hit.transform.gameObject.GetComponent<Berzerker>();
+            if (b != null){
+                Debug.Log("Hit myself!!!");
+                transform.gameObject.GetComponent<Character>().applyDamage(1);
+                transform.gameObject.GetComponent<Character>().pushBack(hit.transform);
+            }
+        }
+    }
+
 }
