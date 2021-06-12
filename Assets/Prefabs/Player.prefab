@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 8333219246886457565}
   - component: {fileID: 2818284366669744175}
   - component: {fileID: 3191910837752929664}
-  - component: {fileID: 203941182127203999}
   - component: {fileID: 6973038987174264282}
   - component: {fileID: 2558144093352763238}
-  m_Layer: 0
+  - component: {fileID: 2480232664621859557}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,27 +102,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!50 &203941182127203999
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5193556905391447474}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &6973038987174264282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,10 +116,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 0.2
   health: 1
-  rb2d: {fileID: 203941182127203999}
+  isAlive: 1
+  rb2d: {fileID: 0}
   transform: {fileID: 8333219246886457565}
-  anchor: {fileID: 3279982414083939117, guid: e7d60e78b973f1e4696d3220227e19cd, type: 3}
+  dodgeSpeed: 0.6
+  dodgeMultiplier: 2
+  dodgeTimerFPS: 15
+  berzerker: {fileID: 0}
   lineRenderer: {fileID: 2558144093352763238}
+  maxDistance: 5
 --- !u!120 &2558144093352763238
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -239,3 +223,24 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!50 &2480232664621859557
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5193556905391447474}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

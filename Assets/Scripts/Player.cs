@@ -10,7 +10,7 @@ public class Player : Character
 
     public float dodgeCooldown = 2f;
 
-    public GameObject anchor = null;
+    public Berzerker berzerker = null;
     public LineRenderer lineRenderer = null;
     
     public float maxDistance = 5f;
@@ -42,7 +42,7 @@ public class Player : Character
 
     void Update()
     {
-        FindObjectOfType<GameManager>().GameOver(isAlive);
+        //FindObjectOfType<GameManager>().GameOver(isAlive);
         GetPlayerInput();
         SetPlayerState();
         SetPlayerEffects();
@@ -91,7 +91,7 @@ public class Player : Character
         lineRenderer.endWidth = 0.3f;
 
         lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, anchor.transform.position);
+        lineRenderer.SetPosition(1, berzerker.transform.position);
 
     }
 
@@ -106,7 +106,7 @@ public class Player : Character
                 
         
         Vector3 newPosition = transform.position + intendedMovement;
-        float distance = (newPosition - anchor.transform.position).magnitude;
+        float distance = (newPosition - berzerker.transform.position).magnitude;
 
         if (distance < maxDistance){
             transform.position = newPosition;
@@ -167,6 +167,11 @@ public class Player : Character
 
     void SetPlayerEffects()
     {
+        if(!isAlive){
+            characterSprite.color = Color.red;
+            return;
+        }
+        
         if (isImmune)
         {
             characterSprite.color = Color.cyan;
