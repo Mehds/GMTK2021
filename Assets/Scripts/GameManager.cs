@@ -29,8 +29,10 @@ public class GameManager : MonoBehaviour
         //     Debug.Log("Git Gud! HP:" + playerCharacter.health.ToString());
         // } 
 
-        hud.Refresh(playerCharacter.health, playerCharacter.GetDodgeCooldownTimer());
-        
+        if(playerCharacter != null)
+        {
+            hud.Refresh(playerCharacter.health, playerCharacter.GetDodgeCooldownTimer());
+        }
     }
 
     public void GameOver(bool isAlive)
