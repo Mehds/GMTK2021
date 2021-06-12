@@ -1646,6 +1646,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26150753ba43d044b9193ab2e566d7a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpText: {fileID: 2002795533}
+  dodgeTimerText: {fileID: 1676632112}
 --- !u!114 &1551652212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1659,7 +1661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1906,6 +1908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCharacter: {fileID: 674233479}
   gameOverScript: {fileID: 1628349134}
+  hud: {fileID: 1551652211}
 --- !u!4 &1678554442
 Transform:
   m_ObjectHideFlags: 0
