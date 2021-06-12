@@ -5,7 +5,7 @@ using UnityEngine;
 public class TargetingCone : MonoBehaviour
 {
     public GameObject Parent;
-    public GameObject Target;
+    public Transform TargetTransform;
     public Transform transform;
     public float updateSpeed = 0.2f;
     public float angleChange = 1f;
@@ -21,36 +21,33 @@ public class TargetingCone : MonoBehaviour
     {
         // To-Do: Rotation towards player and shift towards player
         //transform.Rotate(0, 0, Time.deltaTime * 5);
-        Vector3 direction = Target.transform.position - transform.position;
-
+        Vector3 TargetPosition = TargetTransform.position;
+        Vector3 direction = TargetPosition - transform.position;
 
         // Todo: make it less complicated
         // updated y position
-        Vector3 newPosition = transform.position + Vector3.Scale(Vector3.Normalize(direction),new Vector3(0, updateSpeed, 0) );
-        if (newPosition.y < Parent.transform.position.y + 0.75 && newPosition.y > Parent.transform.position.y - 0.75){
-            transform.position = newPosition;
-        }
+        // Vector3 newPosition = transform.position + Vector3.Scale(Vector3.Normalize(direction),new Vector3(0, updateSpeed, 0) );
+        // if (newPosition.y < Parent.transform.position.y + 0.75 && newPosition.y > Parent.transform.position.y - 0.75){
+        //     transform.position = newPosition;
+        // }
 
 
-        // Draw a ray pointing at our target in
+        Vector3 LoS = Quaternion.AngleAxis(transform.eulerAngles.z, new Vector3(0, 0, 1)) * Vector3.down;
 
-        // Debug.Log(transform.eulerAngles);
-        Vector3 LoS = Quaternion.AngleAxis(transform.eulerAngles.z, Vector3.down) * Vector3.down;
+        float angle = Vector3.Angle(LoS, TargetPosition);
 
-        float angle = Vector3.Angle(Vector3.Normalize(Target.transform.position), Vector3.Normalize(transform.position));
-        // float linedUp = Vector3.Angle(Vector3.Normalize(Parent.transform.position), Vector3.Normalize(Target.transform.position));
-        //Debug.Log(angle);
+        // Debug.DrawRay(transform.position, LoS, Color.green);
+        // Debug.DrawRay(transform.position, TargetPosition, Color.red);
 
-        if (angle > 90){
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - angleChange);
-        } else {
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + angleChange);
-        }
+        // Debug.Log(angle);
 
-        Debug.DrawRay(transform.position, LoS, Color.green);
-        Debug.DrawRay(transform.position, Target.transform.position, Color.red);
-
-        
+        if (angle > 3 && angle < 357){
+            if (LoS.y < Vector3.Normalize(TargetPosition).y){
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - angleChange);
+            } else {
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + angleChange);
+            }
+        }        
 
     }
 
