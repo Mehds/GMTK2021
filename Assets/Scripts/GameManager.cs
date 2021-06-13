@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     public HUD hud;
 
-    public float startCountdown = 3;
+    public float startCountdown = 4;
 
     private Player player;
     private Berzerker berzerker;
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
         if(playerCharacter != null)
         {
-            hud.Refresh(playerCharacter.health, playerCharacter.GetDodgeCooldownTimer());
+            hud.Refresh(playerCharacter.health, playerCharacter.GetDodgeCooldownTimer(), startCountdown);
             GameOver(playerCharacter.isAlive);
         }
     }
