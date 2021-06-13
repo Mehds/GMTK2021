@@ -69,7 +69,6 @@ public class Berzerker : MonoBehaviour
         if (direction.magnitude > minimumDistance) {
             transform.position = transform.position + Vector3.Scale(Vector3.Normalize(direction),new Vector3(movementSpeed, movementSpeed, 0) );
         }
-
     }
 
     public void damageTargets(){

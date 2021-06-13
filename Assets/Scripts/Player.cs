@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : Character
 {
-    public float dodgeSpeed = 0.6f;
     public float dodgeMultiplier = 2f;
     public float dodgeTimer = 0.25f; 
     public float dodgeCooldown = 2f;
@@ -13,6 +12,8 @@ public class Player : Character
     public LineRenderer lineRenderer = null;
     public float maxDistance = 5f;
 
+    public float timeToMaxSpeed = 1f;
+    public float currentSpeed = 0f;
     //Private params
 
     private bool isPressedUp = false;
@@ -34,6 +35,9 @@ public class Player : Character
     {
         characterSprite = GetComponent<SpriteRenderer>();
         characterSprite.color = Color.white;
+
+        lineRenderer.sortingLayerName = "Characters";
+        lineRenderer.sortingOrder = 3;
     }
 
     // Update is called once per frame
@@ -49,26 +53,31 @@ public class Player : Character
     void DetermineDirection()
     {
         // TODO: normalize them all.
-        
+        bool isMoving = false;
+
         Vector3 movementDirection = new Vector3(0,0,0);
         if (isPressedUp){
-            movementDirection = movementDirection + new Vector3(0, movementSpeed, 0);
+            movementDirection = movementDirection + new Vector3(0, 1, 0);
             isPressedUp = false;
+            isMoving = true;
         }
 
         if (isPressedDown){
-            movementDirection = movementDirection + new Vector3(0, -1 * movementSpeed, 0);
+            movementDirection = movementDirection + new Vector3(0, -1, 0);
             isPressedDown = false;
+            isMoving = true;
         }
 
         if (isPressedLeft){
-            movementDirection = movementDirection + new Vector3(-1 * movementSpeed, 0, 0);
+            movementDirection = movementDirection + new Vector3(-1 , 0, 0);
             isPressedLeft = false;
+            isMoving = true;
         }
 
         if (isPressedRight){
-            movementDirection = movementDirection + new Vector3(movementSpeed, 0, 0);
+            movementDirection = movementDirection + new Vector3(1, 0, 0);
             isPressedRight = false;
+            isMoving = true;
         }
 
         if(isPressedDodge)
@@ -83,9 +92,11 @@ public class Player : Character
                 Debug.Log("Dodge on cooldown ! " + dodgeCooldownTimer.ToString() + "s left.");
             }
             isPressedDodge = false;
+            isMoving = true;
         }
 
-        handleMovement(movementDirection);
+        // handleMovement(Vector3.Normalize(movementDirection));
+        handleAcceleratedMovement(Vector3.Normalize(movementDirection), isMoving);
     }
 
     void DrawLine(){
@@ -94,17 +105,35 @@ public class Player : Character
 
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, berzerker.transform.position);
-
     }
 
-    void handleMovement(Vector3 intendedMovement){
-        
-        
+    void handleAcceleratedMovement(Vector3 intendedMovement, bool accelerate){
+        float target = 0f;
+        if (accelerate){
+            target = movementSpeed;
+        }
+
+        float changeRate = 1 / timeToMaxSpeed * Time.deltaTime;
+        currentSpeed = Mathf.MoveTowards(currentSpeed, target, changeRate);
+        Debug.Log(changeRate + ", " + currentSpeed);
+
+        intendedMovement = Vector3.Scale(intendedMovement, new Vector3(currentSpeed, currentSpeed, 0));
+        Debug.Log(intendedMovement.magnitude);
 
         if(isDodging)
         {
             intendedMovement = Vector3.Scale (intendedMovement, new Vector3(dodgeMultiplier, dodgeMultiplier, 0));
         }
+
+        Vector3 newPosition = transform.position + intendedMovement;
+        float distance = (newPosition - berzerker.transform.position).magnitude;
+
+        if (distance < maxDistance){
+            transform.position = newPosition;
+        }
+    }
+    void handleMovement(Vector3 intendedMovement){
+
                 
         
         Vector3 newPosition = transform.position + intendedMovement;
@@ -113,12 +142,6 @@ public class Player : Character
         if (distance < maxDistance){
             transform.position = newPosition;
         }
-
-        // TO-DO
-        // Else, get yanked
-
-        // Idea: Movement speed is a function of distance?
-
     }
 
     void GetPlayerInput()
@@ -177,10 +200,12 @@ public class Player : Character
         if (isImmune)
         {
             characterSprite.color = Color.cyan;
+            GetComponent<CapsuleCollider2D>().enabled = false;
         }
         else
         {
             characterSprite.color = Color.white;
+            GetComponent<CapsuleCollider2D>().enabled = true;
         }
     }
 

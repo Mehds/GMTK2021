@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
-        if(SceneManager.GetActiveScene().name != "Level00")
+        if(SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "testScene")
         {
             ennemies = FindObjectsOfType<SwordEnemy>();
             player = FindObjectOfType<Player>();
@@ -47,30 +47,33 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (startCountdown > 0)
+        if(SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "testScene")
         {
-            startCountdown -= Time.deltaTime;
-        }
-        else
-        {
-            if (gamePaused)
+            if (startCountdown > 0)
             {
-                for (int i = 0; i < ennemies.Length; i++)
-                {
-                    ennemies[i].GetComponent<SwordEnemy>().enabled = true;
-                }
-                player.GetComponent<Player>().enabled = true;
-                berzerker.GetComponent<Berzerker>().enabled = true;
-                gamePaused = false;
+                startCountdown -= Time.deltaTime;
             }
-        }
+            else
+            {
+                if (gamePaused)
+                {
+                    for (int i = 0; i < ennemies.Length; i++)
+                    {
+                        ennemies[i].GetComponent<SwordEnemy>().enabled = true;
+                    }
+                    player.GetComponent<Player>().enabled = true;
+                    berzerker.GetComponent<Berzerker>().enabled = true;
+                    gamePaused = false;
+                }
+            }
 
 
-        if(playerCharacter != null)
-        {
-            hud.Refresh(playerCharacter.health, playerCharacter.GetDodgeCooldownTimer(), startCountdown);
-            GameOver(playerCharacter.isAlive);
-            GameWon();
+            if(playerCharacter != null)
+            {
+                hud.Refresh(playerCharacter.health, playerCharacter.GetDodgeCooldownTimer(), startCountdown);
+                GameOver(playerCharacter.isAlive);
+                GameWon();
+            }
         }
     }
 
@@ -96,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene("Level00");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void GameWon()
