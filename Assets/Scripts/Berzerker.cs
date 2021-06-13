@@ -10,9 +10,7 @@ public class Berzerker : MonoBehaviour
     public float minimumDistance = 2f;
 
     public GameObject Target = null;
-
-    private GameObject targetingCone = null;
-    public GameObject targetCircle = null;
+    public GameObject targetingCircle = null;
 
     public bool isAttacking = false;
     public float windUpTime = 1.0f;
@@ -41,9 +39,9 @@ public class Berzerker : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform.gameObject.layer == 8 || other.transform.gameObject.layer == 7){
+        if (other.transform.gameObject.layer == 7){
             isAttacking = true;
-            targetCircle.GetComponent<SpriteRenderer>().enabled = true;
+            targetingCircle.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 
@@ -52,7 +50,7 @@ public class Berzerker : MonoBehaviour
             damageTargets();
             isAttacking = false;
             timeTilAttack = windUpTime;
-            targetCircle.GetComponent<SpriteRenderer>().enabled = false;
+            targetingCircle.GetComponent<SpriteRenderer>().enabled = false;
         } else {
             timeTilAttack -= Time.deltaTime;
         }
@@ -78,11 +76,14 @@ public class Berzerker : MonoBehaviour
 
         Collider2D[] hits;
 
-        hits = Physics2D.OverlapCircleAll(transform.position, 1.5f, targetMask);
+        float radius = targetingCircle.GetComponent<CircleCollider2D>().bounds.extents.x; 
+
+        hits = Physics2D.OverlapCircleAll(transform.position, radius, targetMask);
         
         for (int j = 0; j < hits.Length; j++)
         {
             Collider2D hit = hits[j];
+            Debug.Log((transform.position - hit.transform.position).magnitude);
             Character target = hit.transform.gameObject.GetComponent<Character>();
             if (target == null){
                 target = hit.transform.parent.gameObject.GetComponent<Character>();

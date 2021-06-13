@@ -108,7 +108,10 @@ public class SwordEnemy : Character
         
         Collider2D[] hits;
         int layerMask = 1 << 7;
-        hits = Physics2D.OverlapCircleAll(transform.position, 0.85f, layerMask);
+
+        float radius = targetingCircle.GetComponent<CircleCollider2D>().bounds.extents.x; 
+
+        hits = Physics2D.OverlapCircleAll(transform.position, radius, layerMask);
 
         for (int j = 0; j < hits.Length; j++)
         {

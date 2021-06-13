@@ -22,9 +22,9 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void pushBack(Transform t){
-        Vector3 direction = t.position - transform.position;
-        transform.position -= Vector3.Scale(direction, new Vector3(1.5f, 1.5f, 0f));
+    // public void pushBack(Transform t){
+    //     Vector3 direction = t.position - transform.position;
+    //     transform.position -= Vector3.Scale(direction, new Vector3(1.5f, 1.5f, 0f));
 
-    }
+    // }
 }
