@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private Player player;
     private Berzerker berzerker;
     private Character[] ennemies;
+    private bool gamePaused = true;
 
 
     
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
             player.GetComponent<Player>().enabled = false;
             berzerker.GetComponent<Berzerker>().enabled = false;
 
-            Debug.Log(berzerker.GetComponent<Berzerker>().ToString());
+            //Debug.Log(berzerker.GetComponent<Berzerker>().ToString());
 
         }
     }
@@ -56,13 +57,18 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < ennemies.Length; i++)
+            if (gamePaused)
             {
-                ennemies[i].GetComponent<SwordEnemy>().enabled = true;
+                for (int i = 0; i < ennemies.Length; i++)
+                {
+                    ennemies[i].GetComponent<SwordEnemy>().enabled = true;
+                }
+                player.GetComponent<Player>().enabled = true;
+                berzerker.GetComponent<Berzerker>().enabled = true;
+                gamePaused = false;
             }
-            player.GetComponent<Player>().enabled = true;
-            berzerker.GetComponent<Berzerker>().enabled = true;
         }
+
 
         if(playerCharacter != null)
         {
