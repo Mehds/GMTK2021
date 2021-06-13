@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gamePauseScript != null)
+        {    
         if (Input.GetKeyDown("escape"))
         {
             if(gamePauseScript.GetPauseState())
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
             {
                 PauseGame();
             }
+        }
         }
 
         if(SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "testScene")
@@ -149,6 +152,11 @@ public class GameManager : MonoBehaviour
         SetScripts(false);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     private void SetScripts(bool state)
     {
         Debug.Log("SetScripts reached !" + state.ToString());
@@ -159,4 +167,6 @@ public class GameManager : MonoBehaviour
         player.GetComponent<Player>().enabled = state;
         berzerker.GetComponent<Berzerker>().enabled = state;
     }
+
+    
 }
