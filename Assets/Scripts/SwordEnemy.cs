@@ -91,7 +91,7 @@ public class SwordEnemy : Character
             }
             
             if (direction.magnitude > minimumDistance) {
-                transform.position = transform.position + Vector3.Scale(Vector3.Normalize(direction),new Vector3(movementSpeed, movementSpeed, 0) );
+                transform.position = transform.position + Vector3.Scale(Vector3.Normalize(direction),new Vector3(getMovementSpeed(), getMovementSpeed(), 0) );
             }
         }
     

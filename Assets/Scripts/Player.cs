@@ -111,7 +111,7 @@ public class Player : Character
     void handleAcceleratedMovement(Vector3 intendedMovement, bool accelerate){
         float target = 0f;
         if (accelerate){
-            target = movementSpeed;
+            target = getMovementSpeed();
             lastIntendedMotion = intendedMovement;
         } else {
             intendedMovement = lastIntendedMotion;

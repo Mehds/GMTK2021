@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BladeTrap : MonoBehaviour
 {
-
-    int targetMask = 1 << 8 | 1 << 7;
     public bool horizontal = true;
     public int coefficient = 1;
     private Vector3 initialPosition;
@@ -28,9 +26,6 @@ public class BladeTrap : MonoBehaviour
             maxCoord = initialPosition.y + range;
             minCoord = initialPosition.y - range;
         }
-
-        Debug.Log(maxCoord);
-        Debug.Log(minCoord);
     }
 
     // Update is called once per frame
