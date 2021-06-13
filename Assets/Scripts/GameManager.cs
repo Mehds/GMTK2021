@@ -84,6 +84,11 @@ public class GameManager : MonoBehaviour
             gameOverScript.Setup();
             hud.Disable();
             playerCharacter.GetComponent<Player>().enabled = false ;
+            for (int i = 0; i < ennemies.Length; i++)
+            {
+                ennemies[i].GetComponent<SwordEnemy>().enabled = false;
+            }
+            berzerker.GetComponent<Berzerker>().enabled = false;
         }
     }
 
