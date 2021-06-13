@@ -27,6 +27,7 @@ public class HUD : MonoBehaviour
         else
         {
             DisplayCountdown(countdownTimer);
+
         }
     }
 
