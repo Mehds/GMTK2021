@@ -82,6 +82,10 @@ public class Berzerker : MonoBehaviour
         for (int j = 0; j < hits.Length; j++)
         {
             Collider2D hit = hits[j];
+<<<<<<< HEAD
+            //Debug.Log((transform.position - hit.transform.position).magnitude);
+=======
+>>>>>>> c7989da212116df4af838893882bb7e46f683f55
             Character target = hit.transform.gameObject.GetComponent<Character>();
             if (target == null){
                 target = hit.transform.parent.gameObject.GetComponent<Character>();

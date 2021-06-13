@@ -90,7 +90,7 @@ public class Player : Character
                 dodgeCooldownTimer = dodgeCooldown;
             }
             {
-                Debug.Log("Dodge on cooldown ! " + dodgeCooldownTimer.ToString() + "s left.");
+                //Debug.Log("Dodge on cooldown ! " + dodgeCooldownTimer.ToString() + "s left.");
             }
             isPressedDodge = false;
             isMoving = true;
@@ -119,8 +119,15 @@ public class Player : Character
 
         float changeRate = 1 / timeToMaxSpeed * Time.deltaTime;
         currentSpeed = Mathf.MoveTowards(currentSpeed, target, changeRate);
+<<<<<<< HEAD
+        //Debug.Log(changeRate + ", " + currentSpeed);
 
         intendedMovement = Vector3.Scale(intendedMovement, new Vector3(currentSpeed, currentSpeed, 0));
+        //Debug.Log(intendedMovement.magnitude);
+=======
+
+        intendedMovement = Vector3.Scale(intendedMovement, new Vector3(currentSpeed, currentSpeed, 0));
+>>>>>>> c7989da212116df4af838893882bb7e46f683f55
 
         if(isDodging)
         {

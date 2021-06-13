@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     public GameWonScreen gameWonScript;
 
+    public GamePauseScreen gamePauseScript;
+
     public HUD hud;
 
     public float startCountdown = 4;
@@ -47,6 +49,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown("escape"))
+        {
+            if(gamePauseScript.GetPauseState())
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
+
         if(SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "testScene")
         {
             if (startCountdown > 0)
@@ -121,5 +135,28 @@ public class GameManager : MonoBehaviour
             player.GetComponent<Player>().enabled = false;
             berzerker.GetComponent<Berzerker>().enabled = false;
         }
+    }
+
+    public void ResumeGame()
+    {
+        gamePauseScript.SetInactivePauseScreen();
+        SetScripts(true);
+    }
+
+    public void PauseGame()
+    {
+        gamePauseScript.SetActivePauseScreen();
+        SetScripts(false);
+    }
+
+    private void SetScripts(bool state)
+    {
+        Debug.Log("SetScripts reached !" + state.ToString());
+        for (int i = 0; i < ennemies.Length; i++)
+        {
+        ennemies[i].GetComponent<SwordEnemy>().enabled = state;
+        }
+        player.GetComponent<Player>().enabled = state;
+        berzerker.GetComponent<Berzerker>().enabled = state;
     }
 }
