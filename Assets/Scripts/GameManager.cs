@@ -49,11 +49,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gamePauseScript != null)
+        if (gamePauseScript != null || gameWonScript != null || gameOverScript != null)
         {    
-        if (Input.GetKeyDown("escape"))
+        if (Input.GetKeyDown("escape") && !gameWonScript.GetState() && !gameOverScript.GetState() )
         {
-            if(gamePauseScript.GetPauseState())
+            if(gamePauseScript.GetState())
             {
                 ResumeGame();
             }

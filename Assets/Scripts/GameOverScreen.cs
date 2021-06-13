@@ -9,4 +9,9 @@ public class GameOverScreen : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
+
+    public bool GetState()
+    {
+        return gameObject.activeSelf;
+    }
 }
