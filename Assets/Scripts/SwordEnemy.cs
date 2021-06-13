@@ -40,6 +40,7 @@ public class SwordEnemy : Character
         if (!isAlive) {
             GetComponent<SpriteRenderer>().color = Color.red;
             Destroy(GetComponent<Rigidbody2D>());
+            Destroy(GetComponent<BoxCollider2D>());
             Destroy(targetingCircle);
             transform.gameObject.layer = 2;
         }
