@@ -8,11 +8,26 @@ public class HUD : MonoBehaviour
     // Start is called before the first frame update
     public Text hpText = null;
     public Text dodgeTimerText = null;
+
+    public Text countdownText = null;
     
     public void Refresh(int playerHP, float dodgeCooldownTimer)
     {
         DisplayHP(playerHP);
         DisplayDodgeCooldown(dodgeCooldownTimer);
+    }
+    public void Refresh(int playerHP, float dodgeCooldownTimer, float countdownTimer)
+    {
+        DisplayHP(playerHP);
+        DisplayDodgeCooldown(dodgeCooldownTimer);
+        if (countdownTimer < 0)
+        {  
+            countdownText.enabled = false;
+        }
+        else
+        {
+            DisplayCountdown(countdownTimer);
+        }
     }
 
     public void Disable()
@@ -38,5 +53,17 @@ public class HUD : MonoBehaviour
             dodgeTimerText.color = Color.black;
         }
             
+    }
+
+    private void DisplayCountdown(float countdownTimer)
+    {
+        if(countdownTimer < 1)
+        {
+            countdownText.text = "Run !";
+        }
+        else
+        {
+            countdownText.text = ((int)countdownTimer).ToString();
+        }
     }
 }
