@@ -152,6 +152,11 @@ public class GameManager : MonoBehaviour
         SetScripts(false);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     private void SetScripts(bool state)
     {
         Debug.Log("SetScripts reached !" + state.ToString());
@@ -162,4 +167,6 @@ public class GameManager : MonoBehaviour
         player.GetComponent<Player>().enabled = state;
         berzerker.GetComponent<Berzerker>().enabled = state;
     }
+
+    
 }
