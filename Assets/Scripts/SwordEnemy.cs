@@ -67,15 +67,21 @@ public class SwordEnemy : Character
             Vector3 distToBerzerker = berzerker.transform.position - transform.position;
             Vector3 distToPlayer = player.transform.position - transform.position;
 
-            Vector3 targetPosition = new Vector3(0, 0, 0);
-            Vector3 direction = new Vector3(0, 0, 0);;
-            if (distToBerzerker.magnitude > distToPlayer.magnitude){
-                targetPosition = player.transform.position;
-                direction = distToPlayer;
-            } else {
-                targetPosition = berzerker.transform.position;
-                direction = distToBerzerker;
-            }
+            // Vector3 targetPosition = new Vector3(0, 0, 0);
+            // Vector3 direction = new Vector3(0, 0, 0);
+
+            Vector3 targetPosition = player.transform.position;
+            Vector3 direction = distToPlayer;
+
+            // if (distToBerzerker.magnitude > distToPlayer.magnitude){
+            //     targetPosition = player.transform.position;
+            //     direction = distToPlayer;
+            // } else {
+            //     targetPosition = berzerker.transform.position;
+            //     direction = distToBerzerker;
+            // }
+
+            
 
             if (targetPosition.x < transform.position.x){
                 transform.eulerAngles = new Vector3(0, 0, 0); 
