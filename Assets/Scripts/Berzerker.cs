@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Berzerker : MonoBehaviour
 {   
-    public Transform transform = null;
+    private Transform transform = null;
     public float movementSpeed = 0.1f;
 
     public float minimumDistance = 2f;
@@ -17,12 +17,13 @@ public class Berzerker : MonoBehaviour
     public bool isAttacking = false;
     public float windUpTime = 1.0f;
     private float timeTilAttack;
-    public float range = 2f;
+    int targetMask = 1 << 8 | 1 << 7;
 
     // Start is called before the first frame update
     void Start()
     {
         timeTilAttack = windUpTime;
+        transform = GetComponent<Transform>();
         // targetingCone = transform.Find("TargetingCone").gameObject;
     }
 
@@ -74,15 +75,18 @@ public class Berzerker : MonoBehaviour
     }
 
     public void damageTargets(){
-        int targetMask = 1 << 8 | 1 << 7;
-        RaycastHit2D[] hits;
 
-        hits = Physics2D.CircleCastAll(transform.position, 1.5f, new Vector3(0,0,0), Mathf.Infinity, targetMask);
+        Collider2D[] hits;
+
+        hits = Physics2D.OverlapCircleAll(transform.position, 1.5f, targetMask);
         
         for (int j = 0; j < hits.Length; j++)
         {
-            RaycastHit2D hit = hits[j];
+            Collider2D hit = hits[j];
             Character target = hit.transform.gameObject.GetComponent<Character>();
+            if (target == null){
+                target = hit.transform.parent.gameObject.GetComponent<Character>();
+            }
             if (target != null && target != transform.gameObject){
                 target.applyDamage(5);
             }

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6580187935121291565}
   - component: {fileID: 1848652274640464578}
   - component: {fileID: -7352966568063375491}
-  - component: {fileID: 6730066267212052783}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -97,16 +96,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46967785a701bd4fbfe2bed335b9646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0.05
+  movementSpeed: 0.03
   health: 5
   isAlive: 1
-  rb2d: {fileID: 0}
-  transform: {fileID: 526223234343920330}
   berzerker: {fileID: 0}
   player: {fileID: 0}
-  minimumDistance: 0.6
+  minimumDistance: 0.5
   isAttacking: 0
-  windUpTime: 0.5
+  windUpTime: 0.25
 --- !u!50 &-7352966568063375491
 Rigidbody2D:
   serializedVersion: 4
@@ -128,19 +125,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &6730066267212052783
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 36061990100747522}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.7

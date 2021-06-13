@@ -51,8 +51,6 @@ public class SwordEnemy : Character
     }
     void handleAttack(){
         if (timeTilAttack <= 0){
-            // Debug.Log("BOOM BOOM SHAKALAKA BOOMBOOM!");
-
             damageTargets();
             // Get all gameobjects inside the target
             // Deal damage to all of them
@@ -91,7 +89,7 @@ public class SwordEnemy : Character
         }
     
     void OnTriggerEnter2D(Collider2D other){
-        if (isAlive && other.transform.gameObject.layer == 8){
+        if (isAlive && other.transform.gameObject.layer == 7){
             isAttacking = true;
             if (targetingCircle != null){
                 targetingCircle.GetComponent<SpriteRenderer>().enabled = true;
@@ -102,15 +100,15 @@ public class SwordEnemy : Character
     public void damageTargets()
     {
         
-        RaycastHit2D[] hits;
-
-        hits = Physics2D.CircleCastAll(transform.position, 0.7f, new Vector3(0,0,0));
+        Collider2D[] hits;
+        int layerMask = 1 << 7;
+        hits = Physics2D.OverlapCircleAll(transform.position, 0.85f, layerMask);
 
         for (int j = 0; j < hits.Length; j++)
         {
-            RaycastHit2D hit = hits[j];
+            Collider2D hit = hits[j];
             Character target = hit.transform.gameObject.GetComponent<Character>();
-            if (target != null && target != transform.gameObject && hit.transform.gameObject.layer == 7){
+            if (target != null && target != transform.gameObject){
                 target.applyDamage(1);
             }
 

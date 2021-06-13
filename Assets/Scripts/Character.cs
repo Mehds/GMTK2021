@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public float movementSpeed = 0.3f;
-    public int health = 1;
+    public float movementSpeed;
+    public int health;
     public bool isAlive = true;
     private Transform transform = null;
 

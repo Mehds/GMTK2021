@@ -383,6 +383,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
+      propertyPath: health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 674233479}
@@ -391,12 +395,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1571612280}
     - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
+      propertyPath: windUpTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
       propertyPath: movementSpeed
-      value: 0.01
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
       propertyPath: minimumDistance
-      value: 0.6
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
@@ -426,7 +434,7 @@ PrefabInstance:
       objectReference: {fileID: 1571612284}
     - target: {fileID: 2869358516905168112, guid: e7d60e78b973f1e4696d3220227e19cd, type: 3}
       propertyPath: windUpTime
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2869358516905168112, guid: e7d60e78b973f1e4696d3220227e19cd, type: 3}
       propertyPath: fieldOfView
@@ -438,7 +446,7 @@ PrefabInstance:
       objectReference: {fileID: 1984983}
     - target: {fileID: 2869358516905168112, guid: e7d60e78b973f1e4696d3220227e19cd, type: 3}
       propertyPath: movementSpeed
-      value: 0.075
+      value: 0.045
       objectReference: {fileID: 0}
     - target: {fileID: 2869358516905168112, guid: e7d60e78b973f1e4696d3220227e19cd, type: 3}
       propertyPath: targetingCone
@@ -667,10 +675,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TargetingCircle
       objectReference: {fileID: 0}
-    - target: {fileID: 3662933987636364046, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7345274071571367204, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -732,9 +736,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 196464018}
     m_Modifications:
+    - target: {fileID: -1807100527314185053, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2365809819574309, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
       propertyPath: m_Name
       value: TargetingCircle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365809819574309, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2320576995125907503, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
       propertyPath: Parent
@@ -756,25 +768,17 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.7372549
       objectReference: {fileID: 0}
-    - target: {fileID: 3662933987636364046, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
-      propertyPath: m_Radius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3662933987636364046, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7345274071571367204, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7345274071571367204, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.4
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 7345274071571367204, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.4
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 7345274071571367204, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -961,6 +965,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
+      propertyPath: health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 674233479}
@@ -969,12 +977,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1571612280}
     - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
+      propertyPath: windUpTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
       propertyPath: movementSpeed
-      value: 0.01
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
       propertyPath: minimumDistance
-      value: 0.6
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
@@ -1143,6 +1155,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
+      propertyPath: health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 674233479}
@@ -1151,21 +1167,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1571612280}
     - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
+      propertyPath: windUpTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
       propertyPath: movementSpeed
-      value: 0.01
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
       propertyPath: minimumDistance
-      value: 0.6
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
       propertyPath: targetingCircle
       value: 
       objectReference: {fileID: 978088728}
-    - target: {fileID: 6730066267212052783, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
 --- !u!1 &800611339
@@ -1489,6 +1505,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TargetingCircle
       objectReference: {fileID: 0}
+    - target: {fileID: 2365809819574309, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7345274071571367204, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1545,6 +1565,10 @@ PrefabInstance:
     - target: {fileID: 2365809819574309, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
       propertyPath: m_Name
       value: TargetingCircle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365809819574309, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7345274071571367204, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
       propertyPath: m_RootOrder
@@ -1641,7 +1665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6973038987174264282, guid: 41a7eb3f3a2cd4d45a6bf6de60390eec, type: 3}
       propertyPath: movementSpeed
-      value: 0.085
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 6973038987174264282, guid: 41a7eb3f3a2cd4d45a6bf6de60390eec, type: 3}
       propertyPath: dodgeMultiplier
@@ -1753,6 +1777,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
+      propertyPath: health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 674233479}
@@ -1761,12 +1789,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1571612280}
     - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
+      propertyPath: windUpTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
       propertyPath: movementSpeed
-      value: 0.01
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 1848652274640464578, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
       propertyPath: minimumDistance
-      value: 0.6
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80a894ef3a5f132498226dfe94c2f123, type: 3}
@@ -2557,6 +2589,10 @@ PrefabInstance:
     - target: {fileID: 2365809819574309, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
       propertyPath: m_Name
       value: TargetingCircle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365809819574309, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7345274071571367204, guid: 2db8e56c404d8704dbd4eedf084b568b, type: 3}
       propertyPath: m_RootOrder
