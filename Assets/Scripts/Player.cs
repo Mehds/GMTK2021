@@ -119,15 +119,8 @@ public class Player : Character
 
         float changeRate = 1 / timeToMaxSpeed * Time.deltaTime;
         currentSpeed = Mathf.MoveTowards(currentSpeed, target, changeRate);
-<<<<<<< HEAD
-        //Debug.Log(changeRate + ", " + currentSpeed);
 
         intendedMovement = Vector3.Scale(intendedMovement, new Vector3(currentSpeed, currentSpeed, 0));
-        //Debug.Log(intendedMovement.magnitude);
-=======
-
-        intendedMovement = Vector3.Scale(intendedMovement, new Vector3(currentSpeed, currentSpeed, 0));
->>>>>>> c7989da212116df4af838893882bb7e46f683f55
 
         if(isDodging)
         {
