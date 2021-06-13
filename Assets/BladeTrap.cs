@@ -69,8 +69,12 @@ public class BladeTrap : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other){
+        Debug.Log(other);
+
         if (other.transform.gameObject.layer == 7 || other.transform.gameObject.layer == 8){
-            other.transform.gameObject.GetComponent<Character>().applyDamage(3);
+            if (other.transform.gameObject.GetComponent<Character>().isAlive){
+                other.transform.gameObject.GetComponent<Character>().applyDamage(3);
+            }
         }
     }
 
