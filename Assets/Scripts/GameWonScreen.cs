@@ -9,4 +9,8 @@ public class GameWonScreen : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
+    public bool GetState()
+    {
+        return gameObject.activeSelf;
+    }
 }

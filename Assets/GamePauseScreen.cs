@@ -13,7 +13,7 @@ public class GamePauseScreen : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    public bool GetPauseState()
+    public bool GetState()
     {
         return gameObject.activeSelf;
     }
