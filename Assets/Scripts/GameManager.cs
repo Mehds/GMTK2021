@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public GameOverScreen gameOverScript;
 
+    public GameWonScreen gameWonScript;
+
     public HUD hud;
 
     public float startCountdown = 4;
@@ -17,6 +19,7 @@ public class GameManager : MonoBehaviour
     private Berzerker berzerker;
     private Character[] ennemies;
     private bool gamePaused = true;
+
 
 
     
@@ -67,6 +70,7 @@ public class GameManager : MonoBehaviour
         {
             hud.Refresh(playerCharacter.health, playerCharacter.GetDodgeCooldownTimer(), startCountdown);
             GameOver(playerCharacter.isAlive);
+            GameWon();
         }
     }
 
@@ -93,5 +97,21 @@ public class GameManager : MonoBehaviour
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("Level00");
+    }
+
+    public void GameWon()
+    {
+        bool ennemiesPresent = false;
+        for (int i = 0; i < ennemies.Length; i++)
+        {
+            ennemiesPresent = ennemiesPresent | ennemies[i].isAlive;
+        }
+
+        if (!ennemiesPresent)
+        {
+            gameWonScript.Setup();
+            player.GetComponent<Player>().enabled = false;
+            berzerker.GetComponent<Berzerker>().enabled = false;
+        }
     }
 }
