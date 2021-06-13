@@ -16,13 +16,11 @@ public class Character : MonoBehaviour
         health -= damage;
         if (health <= 0){
             isAlive = false;
-            Debug.Log("OH NO IT DIED");
         }
     }
 
     public void pushBack(Transform t){
         Vector3 direction = t.position - transform.position;
-       
         transform.position -= Vector3.Scale(direction, new Vector3(1.5f, 1.5f, 0f));
 
     }

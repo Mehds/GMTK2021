@@ -7,12 +7,10 @@ public class Player : Character
     public float dodgeSpeed = 0.6f;
     public float dodgeMultiplier = 2f;
     public float dodgeTimer = 0.25f; 
-
     public float dodgeCooldown = 2f;
 
     public Berzerker berzerker = null;
     public LineRenderer lineRenderer = null;
-    
     public float maxDistance = 5f;
 
     //Private params
@@ -42,7 +40,6 @@ public class Player : Character
 
     void Update()
     {
-        //FindObjectOfType<GameManager>().GameOver(isAlive);
         GetPlayerInput();
         SetPlayerState();
         SetPlayerEffects();
