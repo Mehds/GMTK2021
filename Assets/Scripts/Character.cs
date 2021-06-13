@@ -7,11 +7,14 @@ public class Character : MonoBehaviour
     public float movementSpeed = 0.3f;
     public int health = 1;
     public bool isAlive = true;
-    public Rigidbody2D rb2d = null;
-    public Transform transform = null;
+    private Transform transform = null;
 
     // Start is called before the first frame update
     
+    void Start(){
+        transform = GetComponent<Transform>();
+    }
+
     public void applyDamage(int damage){
         health -= damage;
         if (health <= 0){

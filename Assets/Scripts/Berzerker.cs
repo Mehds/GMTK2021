@@ -23,11 +23,11 @@ public class Berzerker : MonoBehaviour
     void Start()
     {
         timeTilAttack = windUpTime;
-        targetingCone = transform.Find("TargetingCone").gameObject;
+        // targetingCone = transform.Find("TargetingCone").gameObject;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (!isAttacking){
             handleMovement();

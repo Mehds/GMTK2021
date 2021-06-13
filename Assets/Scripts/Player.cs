@@ -41,10 +41,12 @@ public class Player : Character
     void Update()
     {
         GetPlayerInput();
+        DetermineDirection();
+        DrawLine();
         SetPlayerState();
         SetPlayerEffects();
     }
-    void FixedUpdate()
+    void DetermineDirection()
     {
 
         Vector3 movementDirection = new Vector3(0,0,0);
@@ -83,7 +85,9 @@ public class Player : Character
         }
 
         handleMovement(movementDirection);
+    }
 
+    void DrawLine(){
         lineRenderer.startWidth = 0.3f;
         lineRenderer.endWidth = 0.3f;
 

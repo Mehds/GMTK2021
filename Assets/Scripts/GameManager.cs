@@ -37,20 +37,12 @@ public class GameManager : MonoBehaviour
             }
             player.GetComponent<Player>().enabled = false;
             berzerker.GetComponent<Berzerker>().enabled = false;
-
-            //Debug.Log(berzerker.GetComponent<Berzerker>().ToString());
-
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if (playerCharacter.health <= 0)
-        // {
-        //     Debug.Log("Git Gud! HP:" + playerCharacter.health.ToString());
-        // } 
-
         if (startCountdown > 0)
         {
             startCountdown -= Time.deltaTime;
