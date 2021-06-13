@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
 
     public HUD hud;
 
+    public float startCountdown = 3;
+
+    private Player player;
+    private Berzerker berzerker;
+    private Character[] ennemies;
 
 
     
@@ -18,7 +23,23 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(SceneManager.GetActiveScene().name != "Level00")
+        {
+            ennemies = FindObjectsOfType<SwordEnemy>();
+            player = FindObjectOfType<Player>();
+            berzerker = FindObjectOfType<Berzerker>();
+
+
+            for (int i = 0; i < ennemies.Length; i++)
+            {
+                ennemies[i].GetComponent<SwordEnemy>().enabled = false;
+            }
+            player.GetComponent<Player>().enabled = false;
+            berzerker.GetComponent<Berzerker>().enabled = false;
+
+            Debug.Log(berzerker.GetComponent<Berzerker>().ToString());
+
+        }
     }
 
     // Update is called once per frame
@@ -29,9 +50,24 @@ public class GameManager : MonoBehaviour
         //     Debug.Log("Git Gud! HP:" + playerCharacter.health.ToString());
         // } 
 
+        if (startCountdown > 0)
+        {
+            startCountdown -= Time.deltaTime;
+        }
+        else
+        {
+            for (int i = 0; i < ennemies.Length; i++)
+            {
+                ennemies[i].GetComponent<SwordEnemy>().enabled = true;
+            }
+            player.GetComponent<Player>().enabled = true;
+            berzerker.GetComponent<Berzerker>().enabled = true;
+        }
+
         if(playerCharacter != null)
         {
             hud.Refresh(playerCharacter.health, playerCharacter.GetDodgeCooldownTimer());
+            GameOver(playerCharacter.isAlive);
         }
     }
 
