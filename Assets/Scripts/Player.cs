@@ -29,6 +29,7 @@ public class Player : Character
     private bool isImmune = false;
     private SpriteRenderer characterSprite = null;
 
+    private Vector3 lastIntendedMotion;
 
     // Start is called before the first frame update
     void Start()
@@ -111,6 +112,9 @@ public class Player : Character
         float target = 0f;
         if (accelerate){
             target = movementSpeed;
+            lastIntendedMotion = intendedMovement;
+        } else {
+            intendedMovement = lastIntendedMotion;
         }
 
         float changeRate = 1 / timeToMaxSpeed * Time.deltaTime;

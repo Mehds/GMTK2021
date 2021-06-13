@@ -418,5 +418,13 @@ PrefabInstance:
       propertyPath: berzerker
       value: 
       objectReference: {fileID: 1065657018}
+    - target: {fileID: 2660726380262944586, guid: 41a7eb3f3a2cd4d45a6bf6de60390eec, type: 3}
+      propertyPath: maxDistance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660726380262944586, guid: 41a7eb3f3a2cd4d45a6bf6de60390eec, type: 3}
+      propertyPath: timeToMaxSpeed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41a7eb3f3a2cd4d45a6bf6de60390eec, type: 3}
