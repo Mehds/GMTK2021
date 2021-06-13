@@ -48,7 +48,8 @@ public class Player : Character
     }
     void DetermineDirection()
     {
-
+        // TODO: normalize them all.
+        
         Vector3 movementDirection = new Vector3(0,0,0);
         if (isPressedUp){
             movementDirection = movementDirection + new Vector3(0, movementSpeed, 0);
